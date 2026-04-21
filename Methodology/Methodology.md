@@ -46,7 +46,7 @@
 - [kafka](https://kafka.apache.org/)
 	- receiving and queuing logs from the log agent of each machine
 
-![[Logs.drawio.png]]
+![[img/Logs.drawio.png]]
 
 ##### NetFlow
 
@@ -57,7 +57,7 @@
 - [kafka](https://kafka.apache.org/)
 	- optional: receiving and queuing NetFlow packets from the NetFlow probe (nProbe on the firewall)
 
-![[NetFlow.drawio.png]]
+![[img/NetFlow.drawio.png]]
 # Attacks
 
 # Timing
