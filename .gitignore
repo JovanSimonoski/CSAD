@@ -1,2 +1,4 @@
 # Ignore the entire vulhub folder
 vulhub/
+Notes.md
+.obsidian/

