@@ -1,6 +1,8 @@
-# Methodology for Creating a Cybersecurity Attacks Dataset - Master's Thesis
+# Cyber Security Attack Dataset
 
 A complete methodology for building a labeled network attack dataset in a controlled environment, suitable for IDS/IPS systems and ML research.
+
+My master thesis, 'A Reproducible Methodology for Generating Modern Intrusion Detection Datasets' is also included as part of this project.
 
 ---
 
