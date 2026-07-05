@@ -270,3 +270,28 @@ docker rm -f $(docker ps -aq) 2>/dev/null   # brute-force fallback
 | APISIX | `http://<vm-ip>:9080` | API token `edd1c9f034335f136f87ad84b625c8f1` |
  
 ---
+
+| VM | Attacks available (`attack_name`) | # | Port |
+|---|---|---|---|
+| **VM-1** | `vulnhub-flask-ssti` | 16 | 8000 |
+| | `vulnhub-airflow-cve-2020-11978` | 17 | 8080 |
+| | `vulnhub-apache-druid-cve-2021-25646` | 25 | 8888 |
+| | `vulnhub-apisix-cve-2020-13945` | 26 | 9080 |
+| **VM-2** | `vulnhub-airflow-cve-2020-17526` | 22 | 8080 |
+| | `vulnhub-activemq-cve-2022-41678` | 20 | 8161 |
+| | `vulnhub-aj-report-cnvd-2024-15077` | 23 | 9095 |
+| **VM-3** | `vulnhub-airflow-cve-2020-11981` | 18 | 6379 |
+| | `vulnhub-1panel-cve-2024-39907` | 19 | 10086 |
+| | `vulnhub-flask-ssti` | 16 | 8000 |
+| **VM-4** | `vulnhub-apache-cxf-cve-2024-28752` | 24 | 8080 |
+| | `vulnhub-activemq-cve-2026-34197` | 21 | 8161 |
+| | `vulnhub-apache-druid-cve-2021-25646` | 25 | 8888 |
+| **VM-5** | `vulnhub-apisix-cve-2020-13945` | 26 | 9080 |
+| | `vulnhub-aj-report-cnvd-2024-15077` | 23 | 9095 |
+| | `vulnhub-1panel-cve-2024-39907` | 19 | 10086 |
+| **VM-6** | `vulnhub-apache-druid-cve-2021-25646` | 25 | 8888 |
+| | `vulnhub-activemq-cve-2022-41678` | 20 | 8161 |
+| | ~~`vulnhub-flask-ssti`~~ *(unavailable — broken image)* | 16 | 8000 |
+| **VM-7** | `vulnhub-apisix-cve-2020-13945` | 26 | 9080 |
+| | `vulnhub-1panel-cve-2024-39907` | 19 | 10086 |
+| | `vulnhub-aj-report-cnvd-2024-15077` | 23 | 9095 |
